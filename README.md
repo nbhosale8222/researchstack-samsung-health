@@ -1,96 +1,153 @@
-## Samsung Health Stack App SDK
-
-The app SDK provides developers with what’s needed to create mobile apps that collect data from participants. You can create a mobile app that solicits survey responses from the participant, receives data from the wearable device, displays information to the participant, and transmits the data to a backend system (yours or ours) for further analysis. Building blocks cover:
-
-- Participant onboarding and consent
-- Survey presentation
-- Creation of participant tasks
-- Visual reporting to keep participants engaged
-- Data management and transmission to the portal
-
-The stack also includes:
-
--   A backend system consisting of services and a data engine available through application programming interface (API) endpoints
--   A web portal for survey creation, participant management, and data analysis
-
-Refer to <a href="https://developer.samsung.com/health/stack" target="_blank">Samsung Developer Portal</a> for documentation, or jump directly to:
-- The <a href="https://developer.samsung.com/health/stack/developer-guide/installation/install-backend.html" target="_blank">backend system installation instructions</a>
-- The <a href="https://developer.samsung.com/health/stack/developer-guide/installation/install-sdk.html" target="_blank">app SDK installation instructions</a>
-- The <a href="https://developer.samsung.com/health/stack/developer-guide/installation/install-portal.html" target="_blank">web portal installation instructions</a>
-- The <a href="https://developer.samsung.com/codelab/health/research-app.html" target="_blank">getting started tutorial</a>
-
-
-
-Follow these instructions to install, build, and verify the app SDK.
-
-> If you are installing the full stack, this installation requires successful prior completion of the [backend system installation](https://developer.samsung.com/health/stack/developer-guide/installation/install-backend.html).
-
-# Prerequisites
-
-## I. Install OpenJDK 17
-
-1. Set up and install OpenJDK 17 using the instructions at [OpenJDK](https://openjdk.org/install) page.
-
-## II. Install Android Studio
-
-1. Set up and install Android Studio on Windows, macOS, or Linux using the instructions at [Android Studio](https://developer.android.com/studio) page.
-
-# Build
-
-## III. Prepare the Modules
-
-1. Open your project's build.gradle file in a text editor or an IDE that supports Kotlin DSL.
-
-2. Locate the `dependencies` block in the build.gradle file. If the block doesn't exist, you can add it at the end of the file:
-
-   ```
-   dependencies {
-       // dependencies go here
-   }
-   ```
-
-3. Add the S-HealthStack SDK and related module dependencies inside the `dependencies` block, like so:
-
-   ```
-   dependencies {
-       implementation("io.s-healthstack:kit:1.0.0")
-       implementation("io.s-healthstack:app-support:1.0.0")
-       implementation("io.s-healthstack:healthdata-link:1.0.0")
-       implementation("io.s-healthstack:healthconnect:1.0.0")
-       implementation("io.s-healthstack:backend-integration:1.0.0")
-       implementation("io.s-healthstack:healthstack-adapter:1.0.0")
-   }
-   ```
-
-   These dependencies will add the necessary modules of the S-HealthStack SDK to your project. You can find a list of all the modules here: [Maven Central - s-healthstack](https://central.sonatype.com/search?smo=true&q=s-healthstack).
-
-   > Version 0.9c refers to the beta version. Please refer to the Maven Center to see the latest versions.
-
-4. Save the build.gradle file.
-
-5. Build your project with Gradle, either using the command line or from within your IDE. Gradle will automatically download the SDK and its dependencies from the appropriate repositories and include them in your project.
-
-## IV. Unit Test
-
-1. Test either all modules or just the kit.
-
-  - To test all modules, including samples:
-
-    ```
-    ./gradlew test
-    ```
-
-  - To test just the kit:
-
-    ```
-    ./gradlew :kit:test
-    ```
-
-
-## V. Check the Coding Style
-
-1. Use the [Compose API guidelines](https://github.com/androidx/androidx/blob/androidx-main/compose/docs/compose-api-guidelines.md) to check your coding style. The guidelines outline the patterns, best practices, and prescriptive style guidelines for writing idiomatic Jetpack Compose APIs.
-
-## VI. Reference Documentation
-
-Refer to our [API reference](https://developer.samsung.com/health/stack/developer-guide/portal-REST-API-reference/all-endpoints/api-overview.html) and [SDK reference](https://developer.samsung.com/health/stack/developer-guide/SDK-Documentation/references/kit/overview.html) documentation for details on all the backend API endpoints and SDK packages.
+Samsung Health Stack – ResearchStack App 
+Overview 
+This project demonstrates integration with Samsung Health Sensor SDK to collect health 
+data from Samsung Galaxy Watch and sync it with an Android mobile application. 
+The app connects to a Samsung wearable device, retrieves sensor data such as heart rate 
+and activity metrics, and displays it inside the Android application. The system uses 
+Samsung’s privileged health tracking APIs for real-time communication between watch and 
+phone. 
+Features 
+• Connect Samsung Galaxy Watch to Android phone 
+• Retrieve real-time sensor data 
+• Sync health metrics from watch to mobile app 
+• Display live health tracking values 
+• Wireless debugging support 
+• Background data sync 
+• Wearable + Mobile integration 
+Project Structure 
+app-sdk/ 
+├ auth 
+├ backend-integration 
+├ libs/privsdk 
+├ samples 
+├ privsdkwrapper 
+└ common 
+The libs/privsdk folder contains required Samsung Health SDK .aar files. 
+Requirements 
+Hardware Requirements 
+• Samsung Galaxy Phone (One UI supported) 
+• Samsung Galaxy Watch (Wear OS) 
+• Same WiFi network (Phone + Laptop) 
+• Bluetooth enabled 
+Recommended devices: 
+• Galaxy Watch 4 / 5 / 6 
+• Samsung Galaxy S series / A series 
+Software Requirements 
+• Android Studio (latest) 
+• Java 17 / Kotlin support 
+• Android SDK 33+ 
+• ADB installed 
+• Samsung Health Sensor SDK (.aar files) 
+• Wireless Debugging enabled 
+Required Samsung SDK Files 
+Place the following file in: 
+app-sdk/libs/privsdk/ 
+Required file: 
+samsung-health-sensor-api-v1.3.0.aar 
+Then sync Gradle. 
+How the App Works 
+1. App starts on Android phone 
+2. App connects to Samsung Watch 
+3. Watch sensors start collecting data 
+4. Data sent using Samsung Health SDK 
+5. Mobile app receives sensor stream 
+6. Data displayed in UI 
+7. Data stored locally / processed 
+Setup Instructions 
+Step 1 — Clone Repository 
+git clone <your-repo-url> 
+cd app-sdk 
+Step 2 — Open in Android Studio 
+Open project: 
+File → Open → app-sdk 
+Wait for Gradle sync. 
+Step 3 — Add Missing Samsung SDK 
+Copy .aar file into: 
+app-sdk/libs/privsdk/ 
+Then click: 
+Sync Project with Gradle Files 
+Connecting Samsung Phone 
+Enable developer options: 
+Settings → About phone → Tap Build Number 7 times 
+Then enable: 
+Developer Options → Wireless Debugging 
+Pair device: 
+adb pair IP:PORT 
+adb connect IP:PORT 
+Verify: 
+adb devices 
+Connecting Samsung Watch 
+Step 1 
+Pair watch with phone using Galaxy Wearable app 
+Step 2 
+Enable developer mode on watch: 
+Settings → About Watch → Software → Tap version 7 times 
+Step 3 
+Enable: 
+Developer Options → ADB debugging 
+Wireless debugging 
+Step 4 
+Connect watch using ADB 
+adb connect WATCH_IP:PORT 
+Running the App 
+1. Connect phone using ADB 
+2. Connect watch using ADB 
+3. Run Android app 
+Android Studio: 
+Run ▶ 
+Select device: 
+Samsung phone 
+App will install. 
+Data Sync Flow 
+Samsung Watch 
+↓ 
+Sensor API 
+↓ 
+Samsung Health SDK 
+↓ 
+Phone App 
+↓ 
+UI Display 
+↓ 
+Local Storage 
+Syncing Health Data 
+The app syncs: 
+• Heart rate 
+• Steps 
+• Activity 
+• Motion sensors 
+• Health metrics 
+Sync happens: 
+• Real-time streaming 
+• Background service 
+• Manual refresh 
+Troubleshooting 
+Device not showing 
+Run: 
+adb devices 
+Reconnect. 
+Missing AAR file 
+Add: 
+samsung-health-sensor-api-v1.3.0.aar 
+Watch not connecting 
+Ensure: 
+• Same WiFi 
+• Debugging enabled 
+• Bluetooth ON 
+Build 
+Debug build: 
+Build → Build APK 
+APK location: 
+app/build/outputs/apk/debug/ 
+Tech Stack 
+• Android (Kotlin) 
+• Samsung Health Sensor SDK 
+• Wear OS 
+• ADB Wireless Debugging 
+• Gradle Kotlin DSL 
+Author 
+Nikhil Bhosale 
+Samsung Health Stack Research Project 
+License 
+Samsung Privileged SDK required 
+For research and development use only 
