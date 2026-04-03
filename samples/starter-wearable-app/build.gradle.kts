@@ -71,7 +71,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
     buildFeatures {
         buildConfig = true
@@ -96,9 +96,11 @@ dependencies {
     implementation(AppDependencies.ANDROIDX_COMPAT)
     implementation(AppDependencies.MATERIAL)
     implementation(AppDependencies.COMPOSE_MATERIAL_WEAR)
-    implementation(project(mapOf("path" to ":common")))
-    implementation(project(mapOf("path" to ":privsdkwrapper")))
+
+    implementation(project(":common"))
+    implementation(project(":privsdkwrapper"))
     implementation(project(":libs:privsdk"))
+
     implementation(AppDependencies.COMPOSE_FOUNDATION)
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:${Versions.KOTLIN}"))
     debugImplementation(AppDependencies.uiDebugLibsWearable)
@@ -107,7 +109,8 @@ dependencies {
 
     // Room
     implementation(AppDependencies.roomLibs)
-    kapt(listOf(AppDependencies.ANDROIDX_ROOM_COMPILER))
+    kapt(AppDependencies.ANDROIDX_ROOM_COMPILER)
+
     implementation(AppDependencies.ANDROIDX_PAGING)
     implementation(AppDependencies.ANDROIDX_ROOM_PAGING)
 

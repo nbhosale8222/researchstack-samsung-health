@@ -23,7 +23,7 @@ android {
 
     buildTypes {
         debug {
-            enableUnitTestCoverage
+            enableUnitTestCoverage = true
         }
         release {
             isMinifyEnabled = false
